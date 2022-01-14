@@ -21,13 +21,15 @@ ___
    -  Mixed는 Repository뿐만 아니라 staging area에 있는 기록도 삭제된다. 만약 옵션을 까먹고 입력한다면 mixed로 입력이 될 것이다.
    -  마지막으로 Hard는 working directory마저 삭제되기 때문에 내 현재 기록이 아예 날아갈 수 있다. ~~웬만하면 Hard는 아이스크림만 먹자.~~
    ### 그러면 reset의 예시좀 알려줘!
-    <img width = "80%" src="https://user-images.githubusercontent.com/97590480/149522239-4f65800c-4007-40a5-b827-f9aae98a6ba3.png">
-    - 여기 보면 노란색으로 쌓인 수많은 commit들을 볼 수 있다. 저것들은 깃헙에 내가 생각한대로 안올라가서 애를 먹은 흔적들이다.
-    > 저 기록들을 보고 싶다면 `git log --oneline`을 입력하면 된다.
+    <img width = "80%" src="https://user-images.githubusercontent.com/97590480/149522239-4f65800c-4007-40a5-b827-f9aae98a6ba3.png">   
+
+   - 여기 보면 노란색으로 쌓인 수많은 commit들을 볼 수 있다. 저것들은 깃헙에 내가 생각한대로 안올라가서 애를 먹은 흔적들이다.
+   > 저 기록들을 보고 싶다면 `git log --oneline`을 입력하면 된다.
     - 저기 중에서 내가 Day2_1 commit으로 돌아가고 싶다면 `git reset --mixed 9c11d47`을 입력하면 된다.
 
     <img width = "80%" src="https://user-images.githubusercontent.com/97590480/149523046-ad0471bf-8b50-452b-a91c-f0a42b5f2ace.png">
-    > 9c11d47 옆에 head가 생긴 것을 볼 수 있다. head는 현재 내가 있는 커밋을 의미하므로 reset을 통해 제대로 과거로 돌아왔다는 것을 알 수 있다.
+
+ > 9c11d47 옆에 head가 생긴 것을 볼 수 있다. head는 현재 내가 있는 커밋을 의미하므로 reset을 통해 제대로 과거로 돌아왔다는 것을 알 수 있다.
 
    ### 도와줘! 실수로 다른 커밋으로 리셋했어!
     - `git log --oneline`을 입력하여 봤는데 실수로 원래 내가 되돌아가려했던 커밋이 사라졌다면 기록을 보며 좌절하지 말자. `git reflog`를 입력하면 삭제했던 내 커밋들이 다시 나오는 것을 볼 수 있다.

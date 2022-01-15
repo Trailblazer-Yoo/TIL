@@ -11,7 +11,8 @@ ___
  ### 2. branch는 그럼 어떻게 사용해?
    - branch를 사용하기 전에 __git graph__ 라는 것을 깔고 시작하면 이해하기 매우 좋다.
    - VSC 왼쪽 아이콘 중에 테트리스 블록같이 생긴 아이콘을 클릭하고 Git Graph라고 친 다음 깔아주면 된다.
-   <img width = "80%" src="https://user-images.githubusercontent.com/97590480/149624693-76ce5237-d03b-4e3f-85f7-44474cee1ece.png">
+<img width = "80%" src="https://user-images.githubusercontent.com/97590480/149624693-76ce5237-d03b-4e3f-85f7-44474cee1ece.png">
+
   > 왼쪽 아이콘들 중 위에서 세번째 아이콘을 클릭하고 저 빨간색 동그라미를 클릭하면 그래프가 나오는데 커밋의 진행 상황을 나타내준다. 저 창을 추가해주고 작성하면 시각적으로 한눈에 들어온다.
  ### 3. 너 말대로 깔았어. 이제 진짜 사용법을 알려줘
    - 우선 `git branch`를 입력하면 branch의 목록을 보여준다. 현재는 master밖에 없는 상황이다.

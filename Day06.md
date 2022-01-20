@@ -6,7 +6,8 @@ ___
 
 ## 알고리즘 문제_은행잔고 알고리즘 만들기
 
-```홍길동 통장
+```python
+홍길동 통장
 ----------------
 1. 잔액확인
 2. 입금
@@ -41,7 +42,8 @@ amount : 초기값 0
 ```
 
 ### 메뉴창 만들기
-```owner = '홍길동'
+```python
+owner = '홍길동'
 amount = 0
 menu_list = [1,2,3,4]
 init_password = 1234
@@ -84,7 +86,7 @@ init_password = 1234
 ```
  - 초기값을 설정해주는 파트이다. 패스워드는 임의의 값으로 성정했다.
 
-```
+```python
 print(f'{owner} 통장')
     print("-"*30)
     for i in menu_list:
@@ -95,7 +97,8 @@ print(f'{owner} 통장')
 ```
  - 계좌와 관련된 메뉴창을 보여주는 파트이다. 중간에 for문을 넣은 이유는 단지 익숙하게 연습하기 위해 넣은 것이다. 저렇게 하면 연산 시간이 늘어나므로 그냥 `print(""" """)`로 처리하자.
 
-```menu_number = int(input("메뉴를 선택해 주세요."))
+```python
+menu_number = int(input("메뉴를 선택해 주세요."))
     if menu_number in menu_list:
         password = int(input("계좌 비밀번호를 입력해 주세요."))
         if init_password == password:

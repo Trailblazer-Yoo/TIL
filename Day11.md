@@ -135,7 +135,7 @@ plt.show()
 ___
 ### 2. barplot
 
-<img src="https://user-images.githubusercontent.com/97590480/150622740-9cef8a45-fe29-4fb9-ba39-47ecc13da7f2.png">
+<img src="https://user-images.githubusercontent.com/97590480/150623184-5c071cc9-b512-4fb0-8681-809cfeba40a3.png">
 
 ```python
 import matplotlib.pyplot as plt
@@ -153,8 +153,8 @@ sns.barplot(x = 'sex', y = 'survived', hue = 'class', data = titanic, ax = ax2)
 sns.barplot(x = 'sex', y = 'survived', hue = 'class', dodge = False, data = titanic, ax = ax3)
 
 ax1.set_title('titanic survived - sex')
-ax1.set_title('titanic survived - sex/class')
-ax1.set_title('titanic survived - sex/class(stacked)')
+ax2.set_title('titanic survived - sex/class')
+ax3.set_title('titanic survived - sex/class(stacked)')
 ```
 
 - 여기서는 막대 그래프에 좀더 다양한 기능들을 볼수 있다.

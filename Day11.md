@@ -20,7 +20,7 @@ plt.boxplot(result)
 plt.show()
 ```
 
-<img src="https://user-images.githubusercontent.com/97590480/150621312-9c5144fc-7203-4b93-8f01-68e5c4e2024b.png">>
+<img src="https://user-images.githubusercontent.com/97590480/150621312-9c5144fc-7203-4b93-8f01-68e5c4e2024b.png">
 
 > 첫번째 줄에 리스트 안에 있는 값들을 boxplot으로 표현한 것이다. 노란색 줄은 중앙값이고, 상자의 윗쪽 값은 3분위수, 아래 값은 1분위수이다. 그리고 일직선에 수직으로 표시된 양 끝값은 최댓값과 최솟값이다.
 
@@ -49,6 +49,8 @@ ___
 ### 2. 파이 도형
 파이 도형은 원 안에 각 데이터가 차지하는 비율을 표시해준다.
 
+<img src="https://user-images.githubusercontent.com/97590480/150621582-190ac0b7-ef7e-4d08-bb31-435e7bcd3536.png">
+
 ```python
 size = [2441, 2312, 1031, 1233]
 label = ['A','B','C','O']
@@ -58,8 +60,6 @@ plt.pie(size, labels = label, autopct = '%.1f%%', colors = color, explode= (0,0,
 plt.legend()
 plt.show()
 ```
-
-<img src="https://user-images.githubusercontent.com/97590480/150621582-190ac0b7-ef7e-4d08-bb31-435e7bcd3536.png">
 
 - label은 각 데이터에 대한 제목을 설정해준다.
 - `plt.axis('equal')`은 파이 차트가 찌그러지게 나올 수 있는데, 이를 방지하기 위해 원형으로 만들어주는 명령어이다. 필요하면 찾아서 넣자.

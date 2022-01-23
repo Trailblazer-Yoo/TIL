@@ -6,7 +6,7 @@ ___
 ## 과제 성적관리 프로그램
 오늘은 과제에 대한 해설을 하고자 한다.
 
-<img src="https://user-images.githubusercontent.com/97590480/150683184-81fd2d9a-ec14-4593-9d66-3aab81e3cb6b.png">
+<img width = "50%" src="https://user-images.githubusercontent.com/97590480/150683184-81fd2d9a-ec14-4593-9d66-3aab81e3cb6b.png">
 
 ```python
 data_k={'홍길동':90,'김기영':77,'곽진수':88}

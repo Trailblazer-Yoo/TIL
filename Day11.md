@@ -2,7 +2,7 @@
 
 ___
 
-> Jan/21th/2022_Multi campus_유선종 Day10
+> Jan/22th/2022_Multi campus_유선종 Day11
 ## 데이터 시각화 matplotlib 2일차
 어제에 이어서 데이터를 여러 시각화 방식으로 표현해보자
 

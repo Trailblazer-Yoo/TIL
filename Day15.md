@@ -40,7 +40,7 @@ ___
 #### 1. 순위 데이터
 먼저 웹툰 페이지에 오른쪽에 있는 오늘의 순위 데이터를 뽑아온다고 가정해보자.
 
-<img width = "50%" src="https://user-images.githubusercontent.com/97590480/151163534-a9df6af6-ab56-4d84-9758-ba2bcbfceff1.png">
+<img src="https://user-images.githubusercontent.com/97590480/151163534-a9df6af6-ab56-4d84-9758-ba2bcbfceff1.png">
 
 > 여기서 빨간색 네모칸에 있는 순위의 만화 제목을 데이터로 뽑아내고 싶다.
 
@@ -136,7 +136,7 @@ for year in range(2017,2022):
 
 이제 하나하나 분석해보자.
 
-<img width = "80%" src="https://user-images.githubusercontent.com/97590480/151173644-7beac346-59c5-4261-b657-2a6a98d92ae6.png">
+<img src="https://user-images.githubusercontent.com/97590480/151173644-7beac346-59c5-4261-b657-2a6a98d92ae6.png">
 
 ```python
 for year in range(2017,2022):
@@ -167,7 +167,7 @@ for i,img in enumerate(imgs):
 - `if img_url.startswith("//"): img_url = "http:" + img_url`은 하이퍼링크에 http:가 없는 경우가 있다. 따라서 옆에 http:를 붙여주는 명령어이다.
 - 즉, img_url은 완전히 하이퍼링크 값을 가지게 된다.
 
-<img width = "50%" src="https://user-images.githubusercontent.com/97590480/151175369-ef7e98d3-f68a-4e09-9214-82a94efde414.png">
+<img width = "80%" src="https://user-images.githubusercontent.com/97590480/151175369-ef7e98d3-f68a-4e09-9214-82a94efde414.png">
 
 > 하이퍼링크로 들어가면 위의 이미지처럼 나오게 된다.
 - __여기서 중요한 것은 하이퍼링크라는 것이다. img_url은 이미지가 아니다. 그러나 하이퍼링크로 들어가면 이미지만 존재한다. 즉, 여기서 img_url로 재크롤링을 해야 된다는 것이다.__

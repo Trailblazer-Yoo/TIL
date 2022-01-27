@@ -69,7 +69,7 @@ print(ul)
 </ul>
 ```
 
-- 여기서 bye만 추출하고 싶다고 생각해보자. 그렇다면 `ul.fince("li")`를 해야 된다고 생각할 것이다.
+- 여기서 bye만 추출하고 싶다고 생각해보자. 그렇다면 `ul.find("li")`를 해야 된다고 생각할 것이다.
 
 ```python
 bs_source = bs4.BeautifulSoup(html_str, "html.parser")
@@ -174,6 +174,6 @@ atag = bs_source.find("a", {"href" : "http://www.google.com/"})
 print(atag['href'])
 ```
 
-- 여기서 `bs_source.find("a", {"href" : "http://www.google.com/"})` 코드는 수많은 `<a>` 태그 중에서 하이퍼링크 속성값으로 구글을 갖는 앵커 태그를 가져온다는 뜻이다.
-- 만약, `print(atag.text)`를 입력하면 '구글'이 나오게 된다. 반면에, `print(atag['href'])`를 입력하게 되면 {속성:속성값}의 딕셔너리 형태로 저장되어 있는 속성들 중에서 key값으로 'href'를 갖는 속성값인 `"http://www,facebook.com"`이 나오게 된다.   
+- 여기서 `bs_source.find("a", {"href" : "http://www.google.com/"})` 코드는 수많은 `<a>` 태그 중에서 하이퍼링크 속성값으로 구글 주소값을 갖는 앵커 태그를 가져온다는 뜻이다.
+- 만약, `print(atag.text)`를 입력하면 `구글`이 나오게 된다. 반면에, `print(atag['href'])`를 입력하게 되면 {속성:속성값}의 딕셔너리 형태로 저장되어 있는 속성들 중에서 key값으로 'href'를 갖는 속성값인 `"http://www,facebook.com"`이 나오게 된다.   
 기본적인 크롤링과 파싱 방법을 배웠다. 다음엔 실제로 웹 브라우저에서 데이터를 가져와 추출하는 것을 응용해보는 시간을 가져보자.

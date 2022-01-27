@@ -40,7 +40,7 @@ driver.get(url)
 - `webdriver.Chrome(구글드라이버 위치)`를 driver에 넣어준다. 보통 셀레니움을 할 때 driver을 관례상 많이 쓴다. 또한, webdriver.Safari 처럼 사용할 수 있다. 그러나 크롬이 가장 사용하기 좋은 브라우저이기 때문에 웬만하면 크롬을 사용하자.
 - 이렇게 driver에 Chromedriver를 r로 읽기 모드로 실행시키는 명령어를 담아주고 `driver.명령어`을 사용하면 구글 드라이버를 매개로 명령어를 크롬에 실행시켜준다. 즉, `driver.get(url)` 명령어를 입력하면 url이 실행된다. 즉, 네이버가 켜진다.
 > veryvery nice하다
-
+___
 ### 3. 검색창에 검색하기
 네이버의 검색창에 '네이버 주식'을 검색하여 들어가보자.
 
@@ -64,7 +64,7 @@ element.send_keys(Keys.ENTER)
 - `driver.find_element_by_id`는 id를 찾는 명령어이다. 보통 id는 고유값을 갖기 때문에 그 요소을 갖는 어떠한 태그를 가져온다. 즉, 위에 사진에서 빨간색 네모 안의 태그를 가져온다.
 - `.send_keys("입력할 내용")` 을 이용해서 네이버 주식이라는 텍스트를 넣는다. `<input>` 태그이기 때문에 텍스트를 입력하면 그 텍스트를 입력받는다.
 - `send_keys(Keys.ENTER)` 명령어는 우리 키보드의 엔터키를 입력하는 명령어이다. 즉, 어떤 태그이든 엔터가 먹히는 태그는 이 명령어를 사용할 수 있다.
-
+___
 ### 4. 네이버 아이디 접속하기
 이번에는 네이버 아이디를 접속해보자.
 
@@ -93,7 +93,7 @@ driver.find_element_by_id(log.login).click() ## 로그인 클릭
 ```
 - 위에처럼 입력하면 검색창에서 했던 것처럼 send_keys를 이용해서 로그인을 하는 방법이다. 그러나 네이버에서는 로그인이 안되는 것을 볼 수 있는데, 네이버에서 이렇게 로그인하는 것을 보안을 위해 막은 것이다.
 - 그렇기 때문에 복사를 해서 입력을 해줘야 한다.
-
+___
 ```python
 import pyperclip
 
@@ -112,7 +112,7 @@ driver.find_element_by_class_name("btn_login").click() # 로그인 클릭
 - `driver.execute_script("arguments[0].innerText = 'off'", element)`는 스크립트를 입력할 때 사용한다. 즉, `<span>on`에서 'on'이라는 스크립트를 'off'로 바꿔는 명령어라고 보면 된다.
 >arguemnts[0]이 들어가는 이유는 arguments가 *args를 의미한다. 즉, 수많은 요소들 중에서 첫번재를 의미하고, 여기서는 [0]은 element를 지칭한다. 즉, (arguments[], element, element2, element3, ...) 해서 다른 수많은 element를 지칭할 수 있지만, 굳이 그럴 필요는 없기에 여기서는 하나만 넣고 arguments도 [0]을 넣어서 첫번째 것만 지칭한다.
 - 이렇게 하면 정상적으로 로그인되는 모습을 볼 수 있다.
-
+___
 ### 5. 셀레니움을 이용한 파싱
 셀레니움 또한 파싱을 사용할 수 있다. 이전에 사용했던 간단한 파싱을 넣어보자.
 

@@ -19,7 +19,7 @@ ___
 - 데이터를 수집할 때 유의할 것은 저작권이나 JavaScript인지 등이다. 웹 브라우저에서 사용자가 접근하는 것을 막아놓은 것들이 있는데 naver.com/robots.txt를 통해 확인할 수 있다. 막아놓은 디렉토리에 억지로 접근하여 데이터를 수집하면 당연히 처벌받는다. 자바는 크롤링이 되지 않는 경우가 있으니 구별해야 한다.
 ___
 ### 2. requests(크롤링)
-데이터 수집 단계를 다시 한 번 상기시켜보자. **Rquest(접근) - Response(반응) - Source(소스) - Database(데이터베이스)** 순이다. 그 중 Request와 Response를 수행하는 모듈이 requests이다.
+데이터 수집 단계를 다시 한 번 상기시켜보자. **Rquest(접근) - Response(반응) - Source(소스) - Database(데이터베이스)** 순이다. 그 중 Request와 Response를 수행하는 라이브러리가 requests이다.
 
 ```python
 import requests
@@ -34,7 +34,7 @@ print(res.status_code) # 정상일 경우 값 = 200
 ___
 ### 3. BeautifulSoup(파싱)
 데이터 수집 단계에서 크롤링을 통해 Source(소스)를 생성했다면 이를 데이터베이스에 저장하기 위해 소스를 가공하는 작업을 파싱이라 한다. 즉 우리가 받은 웹페이지에서 원하는 내용만 추출하는 작업이다.
-- 이 작업을 수행하기 위해서 우리는 BeautifulSoup라는 모듈을 사용하게 된다. 예시를 통해 사용법을 익혀보자.
+- 이 작업을 수행하기 위해서 우리는 BeautifulSoup라는 라이브러리을 사용하게 된다. 예시를 통해 사용법을 익혀보자.
 ___
 #### 1. text
 

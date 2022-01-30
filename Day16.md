@@ -5,7 +5,7 @@ ___
 > Jan/27th/2022_Multi campus_유선종 Day16
 
 ## 셀레니움
-셀레니움은 웹 페이지를 코딩을 통해 자동으로 제어하는 모듈이다. 내가 매일매일 주식창과 분석창 등 하나하나 마우스로 클릭하여 정보를 얻기 귀찮다면 코딩으로 실행 버튼 하나만 누르면 모든 창이 켜지고 정보를 알아서 얻어올 수 있다.
+셀레니움은 웹 페이지를 코딩을 통해 자동으로 제어하는 라이브러리이다. 내가 매일매일 주식창과 분석창 등 하나하나 마우스로 클릭하여 정보를 얻기 귀찮다면 코딩으로 실행 버튼 하나만 누르면 모든 창이 켜지고 정보를 알아서 얻어올 수 있다.
 > 내 개인적으로는 귀찮은 것을 정말 싫어하기 때문에 셀레니움을 처음 배웠을 때 갑자기 정신이 맑아지고 집중력이 최대로 올라가는 것을 느꼈다. 셀레니움은 사랑이다.
 그러면 오늘은 셀레니움에 대해 공부하고 다음 시간에 실습을 기술하여 상세하게 알아보겠다.
 
@@ -105,7 +105,7 @@ element = driver.find_element_by_css_selector("span.blind") ## IP보안 태그 �
 driver.execute_script("arguments[0].innerText = 'off'", element) ## IP보안 취소
 driver.find_element_by_class_name("btn_login").click() # 로그인 클릭
 ```
-- 여기서 pyperclip이라는 모듈이 필요한데, 파이퍼클립은 Ctrl + c 를 하면 생기는 클립보드를 이용하는 모듈이다. 즉, `pyperclip.copy`로 내용을 복사하고, `send_keys(Keys.CTRL + V)`를 이용해서 붙여넣는다. 나는 맥이기 때문에 COMMAND를 입력한다.
+- 여기서 pyperclip이라는 라이브러리이 필요한데, 파이퍼클립은 Ctrl + c 를 하면 생기는 클립보드를 이용하는 라이브러리이다. 즉, `pyperclip.copy`로 내용을 복사하고, `send_keys(Keys.CTRL + V)`를 이용해서 붙여넣는다. 나는 맥이기 때문에 COMMAND를 입력한다.
 - 이렇게 입력하면 정상적으로 로그인이 된다.
 - 그리고 최근 IP보안 때문에 바로 로그인이 안되고 이상한 문제를 풀게 되어있다. 나는 이것도 짜증나서 푸는 명령어를 입력했다.
 - `driver.find_element_by_css_selector`는 css 속성값을 이용해서 태그를 찾는 명령어이다. 즉, `<span>` 태그를 찾을 때 사용하는데, 여기서는 `<span class = "blind" id="switch_blind>on</span>`이므로 span.속성값을 이용해서 찾는다.

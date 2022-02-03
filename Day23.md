@@ -7,7 +7,7 @@ ___
 ## mysql 비밀번호 분실
 어제 mysql 비밀번호 오류가 떠서 해결하느라 애를 먹었다. 결론적으로 내 mac에서 발생한 비밀번호 오류는 brew에서 설치한 mysql과 mysql 홈페이지에서 다운받은 mysql과 충돌이 일어나서 접속이 안된 것 같다. 둘다 삭제한 뒤 mysql 홈페이지에서 다운받으니 잘 된다. 그래서 오늘은 비밀번호 분실시 해결방법을 기록해놓으려 한다.
 > brew와 홈페이지에서 다운받는 것 중에서 brew에서 다운받는 것이 에러가 덜 뜨고 안정적이라고 한다. 하지만 우리 mysql은 m1칩이 탑재된 버전도 지원하기 때문에 나는 홈페이지에서 다운로드 받았다.
-
+___
 ### brew로 설치된 mysql 삭제하기
 1. homebrew로 설치한 경우 터미널을 키고 다음 코드를 하나하나 입력해주자.
 
@@ -49,14 +49,14 @@ sudo rm -rf /Library/PreferencePanes/My*
 
 3. 홈페이지에서 받은 mysql을 삭제하는 방법은 환경설정 -> 맨 아래에 보이는 mysql 클릭 -> Uninstall 클릭 이다. 재설치했다는 것은 설치를 한번 해봤다는 의미이므로 설치하는 방법은 생략하겠다.
 
-<img src="https://user-images.githubusercontent.com/97590480/152305906-0b484bf1-2b6a-460d-9350-c5d1837f4cf6.png">
+<img width = "75%" src="https://user-images.githubusercontent.com/97590480/152305906-0b484bf1-2b6a-460d-9350-c5d1837f4cf6.png">
 
 > Unintall을 해주면 자동으로 삭제해주니 삭제하고 다시 홈페이지에 가서 설치해주면 된다.
 
-<img src="https://user-images.githubusercontent.com/97590480/152306129-3e0e440c-0cfd-491d-9f32-e21c1f02e2ee.png">
+<img width = "75%" src="https://user-images.githubusercontent.com/97590480/152306129-3e0e440c-0cfd-491d-9f32-e21c1f02e2ee.png">
 
 > 위의 Community Server을 클릭하고 자기 맥에 맞는 버전을 설치하면 된다. 주소는 `https://dev.mysql.com/downloads/` 이다.
-
+___
 ### 비밀번호 재설정
 나처럼 두 mysql이 충돌해서 접속이 안되는 문제가 발생한 것이 아니라 비밀번호를 단순히 잊어버렸다면 다음 절차를 이용해서 비밀번호를 재설정해주자.
 

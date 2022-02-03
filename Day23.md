@@ -78,8 +78,8 @@ cd /usr/local/opt/mysql/bin
 ## homebrew로 설치한 경우
 ```
 
-1. 비밀번호 없이도 들어갈 수 있는 명령어를 입력해준다.
-2. 
+3. 비밀번호 없이도 들어갈 수 있는 명령어를 입력해준다.
+
 ```python
 mysqld_safe --skip-grant-tables &
 ```
@@ -103,7 +103,7 @@ flush privileges;
 
 > flush privileges는 권한을 적용하는 명령어이다. 바꾼 비밀번호를 한번 더 도장 쾅쾅 찍는 느낌이다.
 
-혹시 안된다면 밑의 명령어를 입력해보자.
+- 혹시 안된다면 밑의 명령어를 입력해보자.
 
 ```python
 ALTER USER 'root'@'localhost' IDENTIFIED WITH caching_sha2_password BY '????';

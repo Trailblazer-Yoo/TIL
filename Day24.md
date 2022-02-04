@@ -58,3 +58,10 @@ EER 다이어그램은 테이블간의 관계를 도식화하여 보여주는 �
 
 - 위의 사진에서 Database -> forward Engineering을 클릭하면 EER Diagram에서 생성했던 테이블을 다른 DBMS에 보내준다. 여기서는 root밖에 없으므로 아무런 설정을 하지 않으면 root의 스키마에 EER Diagram의 mydb라는 스키마가 생성되고 그 안에 테이블들이 만들어진다.
 - 반대로 Database -> reverse Engineering을 클릭하면 root나 다른 user의 스키마에서 테이블을 가져온다.
+
+<img src="https://user-images.githubusercontent.com/97590480/152513853-ac9dca1e-ab2f-4e86-9f01-b4e002afd2f0.png">
+
+- employees 스키마를 reverse Engineering으로 불러와 EER Diagram창을 불러온 상태이다.
+- 위의 사진처럼 여러 관계가 설정되어 있다.
+- 만약 새로운 관계를 설정하고 싶다면 저 빨간색에서 원하는 관계를 설정할 수 있다.
+- 주의하자. __관계를 설정할 때에는 1:N 일때 N부터 클릭해줘야 한다. 즉 참조하는 테이블부터 선택하고 외래키를 설정할 테이블을 선택해야 된다.__ 반대로 해서 관계가 꼬이는 일이 없도록 하자.

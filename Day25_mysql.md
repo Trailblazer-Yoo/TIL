@@ -40,7 +40,7 @@ CREATE TABLE usertbl -- 회원 테이블
     3. BirthYear 필드는 숫자(INT)를 누락없이 입력해야 한다.
     > int는 integer의 약자로 파이썬에서 정수 데이터와 동일한 기능을 한다.
     4. Height 필드는 숫자(SMALLINT)를 입력하는데 누락이 가능하다.
-    > 여기서 INT와 SMALLINT, TINYINT의 차이는 byte의 차이만 있을뿐 숫자를 입력하는 것은 동일하다. tinyint는 1byte로 0~255, smallint는 2byte로 -32768 ~ 32768, int는 4byte로 2천까지 입력 가능하다.
+    > 여기서 INT와 SMALLINT, TINYINT의 차이는 byte의 차이만 있을뿐 숫자를 입력하는 것은 동일하다. tinyint는 1byte로 0~255, smallint는 2byte로 -32768 ~ 32768, int는 4byte로 2천만까지 입력 가능하다.
     5. mDate는 날짜(DATE) 데이터를 입력받는다. 여기서 날짜를 입력할때 문자열로 입력하며, 형식은 `2022-02-05`로 입력해줘야 한다.
 ___
 
@@ -64,6 +64,11 @@ CREATE TABLE testTBL(id int AUTO_INCREMENT PRIMARY KEY, userName char(3), age in
 INSERT INTO testTBL VALUES (NULL, 'abc', 25);
 INSERT INTO testTBL VALUES (NULL, 'def', 20);
 INSERT INTO testTBL VALUES (NULL, 'ghi', 22);
+###################### 결과값 ####################
+id userName age
+1   abd     25
+2   def     20
+3   ghi     22
 ```
 
 - 위의 커리문을 입력하면 `1 abd 25`, `2 def 20` `3 ghi 22`의 데이터가 입력된다. 즉, id 필드에 NULL값을 입력했는데도 알아서 1씩 더해서 입력해준다. 이를 이용해서 데이터의 갯수를 간편하게 파악할 수 있다.
@@ -82,7 +87,7 @@ INSERT INTO NEWTABLE VALUES (SELECT name, height from USER.USERTBL)
 
 ___
 
-#### 테이블의 데이터 수정 및 삭제
+#### 3. 테이블의 데이터 수정 및 삭제
 
 1. 데이터를 수정하고 싶다면 `UPDATE 테이블이름 SET 필드 = 값, 필드 = 값, ... WHERE 조건`을 입력해주면 된다.
 2. 데이터를 삭제하고 싶다면 `DELETE`를 입력하면 된다.

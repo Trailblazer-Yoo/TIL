@@ -74,7 +74,7 @@ conn.commit()
 
 > pandas에서 배웠던 DataFrame 형태로 데이터가 담겨있는 것을 볼 수 있다.
    1. 이 경우에 평소의 파이썬의 인덱싱이 아니라 pandas의 인덱싱을 사용해야 한다. 우리가 원하는 종목코드와 회사명이므로 `table['종목코드']`를 이용해서 인덱싱할 수 있다.
-   2. 하지만 실제로 실행하면 오류가 난다. `type(talbe)`을 실행하면 list로 나온다. 즉, `len(table)`이 1로 나온 이유는 리스트 안에 DataFrame이 담겨져 있기 때문이다.
+   2. 하지만 실제로 실행하면 오류가 난다. `type(table)`을 실행하면 list로 나온다. 즉, `len(table)`이 1로 나온 이유는 __리스트 안에 DataFrame이__ 담겨져 있기 때문이다.
    3. 그러므로 `table[0]['종목코드']`를 입력해줘야 오류 없이 인덱싱이 된다.
 3. `if len(code) != 6: code = code.zfill(6)` 명령어는 6자리를 맞춰주기 위해서이다.
     - 여기서 규칙을 발견할 수 있었는데, 만약 단축코드가 '123'이라면 이는 앞의 '000'을 생략해서 작성한 것을 알 수 있었다. 즉, 우리가 원하는 데이터는 000이 생략되지 않은 '000123'이므로 데이터 앞에 0을 채워주는 `.zfill(6)` 명령어를 사용한다. 괄호안의 숫자는 0을 몇개 넣을지를 제한을 설정해주는 자릿수를 의미한다.
@@ -208,9 +208,9 @@ while True
 ```
 
 1. 우리는 위에서 fetchone과 `select * from company_info`가 한 세트라는 것을 배웠다. 즉, select문으로 테이블을 열고 fetchone으로 테이블의 데이터를 한줄한줄 읽는다. __문제는 cursor를 진행하면서 테이블이 daily_price로 바뀐 것이다.__
-2. 여기서 오류가 난 코드에서는 while문 안에 `select * from company_info`이 없었기 때문에 현재 우리가 사용하고 있는 테이블은 `daily_price`이다. __왜냐하면 우리는 `cur.execute("insert into daily_price ~~")`를 실행하여 daily_price 테이블로 이동하여 데이터를 입력해줬다.__
+2. 여기서 오류가 난 코드에서는 while문 안에 `select * from company_info`이 없었기 때문에 fetchone은 계속해서 `daily_price` 테이블에서 실행이 된다. __왜냐하면 우리는 `cur.execute("insert into daily_price ~~")`를 실행하여 daily_price 테이블로 이동하여 데이터를 입력해줬다.__
 3. 여기서 fetchone을 사용하면 `daily_price`에서 입력한 마지막 데이터 행의 다음 행으로 넘어가게 된다. 당연히 입력한 데이터가 없기 때문에 None이 뜬다.
-4. 즉, 우리의 커서는 현재 `daily_price`에 존재하기 때문에 코드를 찾을 수 없었던 것이다. 이를 `company_info` 테이블로 변경해주기 위해서 `select * from company_info` 명령어를 while문 안에 추가로 넣어줘야 한다.
+4. 즉, 우리의 커서는 현재 `daily_price`에 존재하기 때문에 코드를 찾을 수 없었던 것이다. 이는 __테이블을 변경해주면__ 해결이 된다. `company_info` 테이블로 변경해주기 위해서 `select * from company_info` 명령어를 while문 안에 추가로 넣어줘야 한다.
 5. select문을 넣어줬다고 해도 fetchone을 사용하면 __다시 첫번째 줄부터__ 읽게 된다. 테이블을 바꿨기 때문에 다시 초기화가 된 것이다.
 6. 결국 내가 원하는 줄 데이터를 뽑기 위해 for문으로 반복해주고, 몇번째 줄을 뽑을지는 `fetchone_repeat`를 입력해서 반복수를 정해줘야 한다. 그러므로 while문 마지막에 `fetchone_repeat += 1`을 입력하여 while문의 루프 횟수를 세주는 명령어를 넣어줘야 한다.
 7. 물론 이런식으로 코딩해도 되지만 파일에서 `f.seek(0)` 명령어 하나만으로 첫번째 줄로 이동하는 것에 비해 입력해야 하는 명령어가 많은 편이다. 차라리 2. 이중 for문을 사용하지 않는 것이 경제적이라 할 수 있다.

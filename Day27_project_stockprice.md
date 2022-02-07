@@ -71,7 +71,12 @@ for code in list:
 1. url에 코드와 페이지에 따라 창이 열리도록 주소값을 할당한다.
 2. headers는 네이버에서 접근을 거부하는 것을 풀어주는 명령어이다. 가끔 '웹페이지를 접근할 수 없습니다.' 하면서 오류 페이지가 뜨는 경우가 있는데, 이는 크롤링하는 나를 유저가 아니라고 판단하고 차단해서 발생한다. 우리는 로봇이 아니라 사람이라는 것을 알려주기 위해 위와 같은 headers 코드를 설정해준다.
 > 위의 코드는 `http://www.useragentstring.com`에 들어가면 맨 위에 있다.
-3. 나머지는 우리에게 익숙한 `requests.get`을 이용해서 html을 긁어오고 오류가 없는지 `res.raise_for_status()`로 확인해준다.
+3. 혹은 개발자도구를 이용해서 찾을 수 있다. 개발자도구를 킨 후에 Network탭을 클릭하고 새로고침을 해주면 Name 밑에 여러개가 뜨는데 아무거나 클릭하면 가장 밑에 'User-Agent'가 존재한다. 이를 복붙해주자.
+
+<img src="https://user-images.githubusercontent.com/97590480/152729336-61c774a4-709a-48ae-a719-5e23cd178b72.png">
+
+4. 나머지는 우리에게 익숙한 `requests.get`을 이용해서 html을 긁어오고 오류가 없는지 `res.raise_for_status()`로 확인해준다.
+
 
 ___
 #### 2. bs4를 이용하여 파싱하기

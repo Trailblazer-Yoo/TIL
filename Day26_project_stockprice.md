@@ -112,10 +112,10 @@ ___
 ```python
 from selenium import webdriver
 
-driver = webdriver.Chrome(r"/Users/yuseonjong/Downloads/chromedrive
-page = 1 ## 페이지
+driver = webdriver.Chrome(r"/Users/yuseonjong/Downloads/chromedrive)
 
 for code in list:
+    page = 1 ## 페이지
     while True:
         url = f"https://finance.naver.com/item/sise_day.naver?code={code}&page={page}"    ## 네이버 시세창만 보여주는 페이지
         driver.get(url)     ## 크롬 열기
@@ -131,7 +131,7 @@ for code in list:
             date = '-'.join(date.text.split('.'))     ## 텍스트만 발라내서 date 형식으로 만들어주기 // 예시 : 2022-01-20
             price = int(price)  ## int로 바꿔주기
             volume = int(volume)    ## int로 바꿔주기
-            cur.execute("insert into daily_price values ('%s', '%s','%d','%d')" % (row[0],date,price,volume))    ## 값 입력 0 : 코드, 1 : 날짜, 2 : 가격, 3 : 거래량
+            cur.execute("insert into daily_price values ('%s', '%s','%d','%d')" % (code,date,price,volume))    ## 값 입력 0 : 코드, 1 : 날짜, 2 : 가격, 3 : 거래량
         page += 1   ## 다음 페이지
 
         if bool(driver.find_elements_by_xpath(f"""//*[text()='맨뒤
@@ -156,8 +156,8 @@ while True:
     if row == None:
         break
     DATA = row[0]
-    page = 1
     for code in DATA ############# <================= 충돌 지점
+        page = 1 
         while True:
             url = f"https://finance.naver.com/item/sise_day.naver?code={code}&page={page}" 
             driver.get(url)    
@@ -173,7 +173,7 @@ while True:
                 date = '-'.join(date.text.split('.'))  
                 price = int(price) 
                 volume = int(volume)    
-                cur.execute("insert into daily_price values ('%s', '%s','%d','%d')" % (row[0],date,price,volume))  ########## <================= 충돌 지점
+                cur.execute("insert into daily_price values ('%s', '%s','%d','%d')" % (code,date,price,volume))  ########## <================= 충돌 지점
             page += 1   
 
             if bool(driver.find_elements_by_xpath(f"""//*[text()='맨뒤

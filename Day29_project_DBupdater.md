@@ -18,12 +18,12 @@ import requests
 from datetime import datetime
 from threading import Timer
 
-class DBUpdater:                                                            #line 1
-    def __init__(self):                                                     #line 2
-        self.conn = pymysql.connect(host='localhost', user='root',          #line 3
-            password='1111', db='INVESTAR10', charset='utf8')               #line 4
+class DBUpdater:                                                                                #line 1
+    def __init__(self):                                                                         #line 2
+        self.conn = pymysql.connect(host='localhost', user='root',                              #line 3
+            password='1111', db='INVESTAR10', charset='utf8')                                   #line 4
         
-        with self.conn.cursor() as curs:                                    #line 5
+        with self.conn.cursor() as curs:                                                        #line 5
             sql = """                                               
             CREATE TABLE IF NOT EXISTS company_info (
                 code VARCHAR(20),
@@ -31,7 +31,7 @@ class DBUpdater:                                                            #lin
                 last_update DATE,
                 PRIMARY KEY (code))
             """
-            curs.execute(sql)                                               #line 6
+            curs.execute(sql)                                                                   #line 6
             sql = """
             CREATE TABLE IF NOT EXISTS daily_price (
                 code VARCHAR(20),
@@ -44,10 +44,10 @@ class DBUpdater:                                                            #lin
                 volume BIGINT(20),
                 PRIMARY KEY (code, date))
             """
-            curs.execute(sql)                                               #line 7
+            curs.execute(sql)                                                                   #line 7
             
-        self.conn.commit()                                                  #line 8
-        self.codes = dict()                                                 #line 9
+        self.conn.commit()                                                                      #line 8
+        self.codes = dict()                                                                     #line 9
 ```
 1. [line 1]에서 `class DBUpdater:`로 클래스를 설정한다.
 2. [line 2]에서 `__init__(self)` 함수를 설정한다. 여기서는 생성자 함수에 변수를 설정하지 않았지만, pymysql의 속성값들을 설정해주기 위해 변수를 설정해주는 것이 더 낫다.
@@ -62,7 +62,7 @@ __del__은 소멸자함수로 클래스를 빠져 나올때 자동으로 실행�
 
 ```python
     def __del__(self):
-        self.conn.close()                                                   #line 10
+        self.conn.close()                                                                       #line 10
 ```
 - [line 10]을 보면 `self.conn.close()`를 통해 자동적으로 mysql과의 연결을 끊는 명령어를 실행해준다.
 ___
@@ -72,13 +72,13 @@ ___
 ```python
 def read_krx_code(self):
         url = 'http://kind.krx.co.kr/corpgeneral/corpList.do?method='\
-            'download&searchType=13'                                        #line 11
-        krx = pd.read_html(url, header=0)[0]                                #line 12
-        krx = krx[['종목코드', '회사명']]                                       #line 13
-        krx = krx.rename(columns={'종목코드': 'code', '회사명': 'company'})     #line 14
-        krx.code = krx.code.map('{:06d}'.format)                            #line 15
+            'download&searchType=13'                                                            #line 11
+        krx = pd.read_html(url, header=0)[0]                                                    #line 12
+        krx = krx[['종목코드', '회사명']]                                                           #line 13
+        krx = krx.rename(columns={'종목코드': 'code', '회사명': 'company'})                         #line 14
+        krx.code = krx.code.map('{:06d}'.format)                                                #line 15
         
-        return krx                                                          #line 16
+        return krx                                                                              #line 16
 ```
 
 1. [line 11]에서 krx의 주소를 url에 저장한다.
@@ -100,16 +100,16 @@ ___
 
 ```python
 def update_comp_info(self):
-        sql = "SELECT * FROM company_info"                                  #line 17
-        df = pd.read_sql(sql, self.conn)                                    #line 18
-        for idx in range(len(df)):                                          #line 19
-            self.codes[df['code'].values[idx]] = df['company'].values[idx]  #line 20
+        sql = "SELECT * FROM company_info"                                                      #line 17
+        df = pd.read_sql(sql, self.conn)                                                        #line 18
+        for idx in range(len(df)):                                                              #line 19
+            self.codes[df['code'].values[idx]] = df['company'].values[idx]                      #line 20
         
-        with self.conn.cursor() as curs:                                    #line 21
-            sql = "SELECT max(last_update) FROM company_info"               #line 22
-            curs.execute(sql)                                               #line 23
-            rs = curs.fetchone()                                            #line 24
-            today = datetime.today().strftime('%Y-%m-%d')                   #line 25
+        with self.conn.cursor() as curs:                                                        #line 21
+            sql = "SELECT max(last_update) FROM company_info"                                   #line 22
+            curs.execute(sql)                                                                   #line 23
+            rs = curs.fetchone()                                                                #line 24
+            today = datetime.today().strftime('%Y-%m-%d')                                       #line 25
 ```
 1. [line 17]에서 company_info 테이블을 불러온다. 현재는 데이터를 입력하지 않았으므로 아무런 데이터도 나오지 않는다.
 2. [line 18]에서 `pd.read_sql`함수를 사용한다. sql문을 읽어서 데이터프레임 형태로 저장하는 함수이다.
@@ -122,21 +122,21 @@ def update_comp_info(self):
 8. [line 25]에서 오늘의 날짜를 불러오는 `datetime.today()`함수를 실행한다. 그 뒤에 `.strftime('%Y-%m-%d')`는 string from time의 약자로 괄호 안의 형식대로 날짜와 시간을 표시해주는 함수이다.
 ___
 ```python
-            if rs[0] == None or rs[0].strftime('%Y-%m-%d') < today:         #line 26        
-                krx = self.read_krx_code()                                  #line 27
-                for idx in range(len(krx)):                                 #line 28
-                    code = krx.code.values[idx]                             #line 29
-                    company = krx.company.values[idx]                       #line 30
+            if rs[0] == None or rs[0].strftime('%Y-%m-%d') < today:                             #line 26
+                krx = self.read_krx_code()                                                      #line 27
+                for idx in range(len(krx)):                                                     #line 28
+                    code = krx.code.values[idx]                                                 #line 29
+                    company = krx.company.values[idx]                                           #line 30
                     
                     sql = f"REPLACE INTO company_info (code, company, last"\
                         f"_update) VALUES ('{code}', '{company}', '{today}')"                                                   
-                    curs.execute(sql)                                       #line 31
-                    self.codes[code] = company                              #line 32
+                    curs.execute(sql)                                                           #line 31
+                    self.codes[code] = company                                                  #line 32
                     
                     # logs
-                    tmnow = datetime.now().strftime('%Y-%m-%d %H:%M')       #line 33
+                    tmnow = datetime.now().strftime('%Y-%m-%d %H:%M')                           #line 33
                     print(f"[{tmnow}] #{idx+1:04d} REPLACE INTO company_info "\
-                        f"VALUES ({code}, {company}, {today})")             #line 34
+                        f"VALUES ({code}, {company}, {today})")                                 #line 34
                 
                 self.conn.commit()
 ```
@@ -152,26 +152,26 @@ ___
 ### 5. 네이버 데이터 크롤링
 이번 함수는 네이버에서 데이터를 크롤링하는 함수이다. 그리고 크롤링한 데이터를 다시 데이터프레임 형태로 만들어준다.
 ```python
-def read_naver(self, code, company, pages_to_fetch):                        #line 35
-        try:                                                                #line 36
-            df = pd.DataFrame()                                             #line 37
+def read_naver(self, code, company, pages_to_fetch):                                            #line 35
+        try:                                                                                    #line 36
+            df = pd.DataFrame()                                                                 #line 37
             
-            url = f"http://finance.naver.com/item/sise_day.nhn?code={code}" #line 38
+            url = f"http://finance.naver.com/item/sise_day.nhn?code={code}"                     #line 38
             html = BeautifulSoup(requests.get(url,
-                headers={'User-agent': 'Mozilla/5.0'}).text, "lxml")        #line 39
+                headers={'User-agent': 'Mozilla/5.0'}).text, "lxml")                            #line 39
             
-            pgrr = html.find("td", class_="pgRR")                           #line 40
+            pgrr = html.find("td", class_="pgRR")                                               #line 40
             if pgrr is None:
                 return None
             
-            s = str(pgrr["href"]).split('=')                                #line 41
-            lastpage = s[-1]                                                #line 42
-            pages = min(int(lastpage), pages_to_fetch)                      #line 43
+            s = str(pgrr["href"]).split('=')                                                    #line 41
+            lastpage = s[-1]                                                                    #line 42
+            pages = min(int(lastpage), pages_to_fetch)                                          #line 43
             
             for page in range(1, pages + 1):            
-                pg_url = '{}&page={}'.format(url, page)                     #line 44               
+                pg_url = '{}&page={}'.format(url, page)                                         #line 44
                 df = df.append(pd.read_html(requests.get(pg_url,
-                    headers={'User-agent': 'Mozilla/5.0'}).text)[0])        #line 45
+                    headers={'User-agent': 'Mozilla/5.0'}).text)[0])                            #line 45
 ```
 1. [line 35]에서 변수로 code 이름, 회사이름, 내가 원하는 페이지수를 받는다.
 2. [line 36]에서 try를 이용해서 오류가 발생했을 경우 해당 오류가 출력되도록 만들어준다.
@@ -192,13 +192,13 @@ def read_naver(self, code, company, pages_to_fetch):                        #lin
                     format(tmnow, company, code, page, pages), end="\r")
                 
             df = df.rename(columns={'날짜':'date','종가':'close','전일비':'diff'
-                ,'시가':'open','고가':'high','저가':'low','거래량':'volume'})    #line 47
-            df['date'] = df['date'].replace('.', '-')                       #line 48
-            df = df.dropna()                                                #line 49
+                ,'시가':'open','고가':'high','저가':'low','거래량':'volume'})                        #line 47
+            df['date'] = df['date'].replace('.', '-')                                           #line 48
+            df = df.dropna()                                                                    #line 49
             df[['close', 'diff', 'open', 'high', 'low', 'volume']] = df[['close',
-                'diff', 'open', 'high', 'low', 'volume']].astype(int)       #line 50
+                'diff', 'open', 'high', 'low', 'volume']].astype(int)                           #line 50
             df = df[['date', 'open', 'high', 'low',
-             'close', 'diff', 'volume']]                                    #line 51
+             'close', 'diff', 'volume']]                                                        #line 51
             
         except Exception as e:
             print('Exception occured :', str(e))

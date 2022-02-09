@@ -192,7 +192,7 @@ def read_naver(self, code, company, pages_to_fetch):                            
                     format(tmnow, company, code, page, pages), end="\r")
                 
             df = df.rename(columns={'날짜':'date','종가':'close','전일비':'diff'
-                ,'시가':'open','고가':'high','저가':'low','거래량':'volume'})                        #line 47
+                ,'시가':'open','고가':'high','저가':'low','거래량':'volume'})                         #line 47
             df['date'] = df['date'].replace('.', '-')                                           #line 48
             df = df.dropna()                                                                    #line 49
             df[['close', 'diff', 'open', 'high', 'low', 'volume']] = df[['close',

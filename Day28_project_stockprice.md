@@ -2,7 +2,7 @@
 
 ___
 
-> Fab/7th/2022_Multi campus_유선종 Day28
+> Fab/8th/2022_Multi campus_유선종 Day28
 
 ## 주가예측 프로젝트 3일차
 오늘은 여태까지 만든 코드를 클래스화하는 작업을 했다.

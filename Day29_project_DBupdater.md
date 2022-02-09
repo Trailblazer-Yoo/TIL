@@ -187,7 +187,7 @@ def read_naver(self, code, company, pages_to_fetch):                        #lin
 
 ```python
                 
-                tmnow = datetime.now().strftime('%Y-%m-%d %H:%M')           #line 46
+                tmnow = datetime.now().strftime('%Y-%m-%d %H:%M')                               #line 46
                 print('[{}] {} ({}) : {:04d}/{:04d} pages are downloading...'.
                     format(tmnow, company, code, page, pages), end="\r")
                 

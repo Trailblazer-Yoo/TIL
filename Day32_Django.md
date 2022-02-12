@@ -59,3 +59,6 @@ python manage.py runserver 0.0.0.0:80000
 <img src="https://user-images.githubusercontent.com/97590480/153715891-51d626d9-46d1-4a12-888f-cc55b57c4e24.png">
 
 > 다음과 같이 잘 출력된다.
+
+### 6. migrate
+이제 잘 만들어진 어플리케이션을 저장해줘야 하는데 이때 사용하는 명령어가 `python manage.py migrate`이다. 이 명령어는 깃처럼 커밋을 생성하는 것이라고 이해하면 좋다. 즉, 버전 업그레이드를 하는 것처럼 한번 찍히면 삭제가 불가능하다. ~~물론 삭제가 가능하지만 복잡해진다.~~

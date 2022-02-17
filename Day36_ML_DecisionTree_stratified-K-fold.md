@@ -19,17 +19,17 @@ from sklearn.metrics import accuracy_score
 import numpy as np                                                                                       
 import pandas as pd  
 
-iris = load_iris()                                                                                              #line 1
+iris = load_iris()                                                                                          #line 1
 
-iris_df = pd.DataFrame(data = iris.data, columns = iris.feature_names)                                          #line 2
+iris_df = pd.DataFrame(data = iris.data, columns = iris.feature_names)                                      #line 2
 
-kfold = KFold(n_splits = 3)                                                                                     #line 3
+kfold = KFold(n_splits = 3)                                                                                 #line 3
 
 n_iter = 0
-for train_index, test_index in kfold.split(iris_df):                                                            #line 4
+for train_index, test_index in kfold.split(iris_df):                                                        #line 4
     n_iter += 1
-    label_train = iris_df['label'].iloc[train_index]                                                            #line 5
-    label_test = iris_df['label'].iloc[test_index]                                                              #line 6
+    label_train = iris_df['label'].iloc[train_index]                                                        #line 5
+    label_test = iris_df['label'].iloc[test_index]                                                          #line 6
     print('## 교차 검증: {0}'.format(n_iter))
     print('학습 레이블 데이터 분포 : \n', label_train.value_counts())
     print('검증 레이블 데이터 분포 : \n', label_test.value_counts())
@@ -48,9 +48,9 @@ ___
 그러면 계층화 K겹(stratified K-fold) 평가 방식은 K-fold와 어떤 차이가 있는지 알아보자. 우선 유념해야 할 키워드는 일정 비율로 데이터를 뽑는다는 것이다.
 
 ```python
-from sklearn.model_selection import StratifiedKFold                                                             #line 8
+from sklearn.model_selection import StratifiedKFold                                                         #line 8
 
-skf = StratifiedKFold(n_splits = 3)                                                                             #line 9
+skf = StratifiedKFold(n_splits = 3)                                                                         #line 9
 n_iter = 0
 
 for train_index, test_index in skf.split(iris_df, iris_df['label']):
@@ -117,7 +117,7 @@ dt_clf = DecisionTreeClassifier(random_state=156)
 data = iris_data.data
 label = iris_data.target
 
-scores = cross_val_score(dt_clf, data, label, scoring = 'accuracy', cv = 3)                                     #line 10
+scores = cross_val_score(dt_clf, data, label, scoring = 'accuracy', cv = 3)                                 #line 10
 ```
 
 1. [line 10]에서 `cross_val_score('모델', 'x 데이터', 'y 데이터', '평가방법', '그룹수')`을 이용하면 교차검증을 이용한 정확도를 계산할 수 있다. 그 결과는 위에서 봤던 stratified K-fold와 동일하다.
@@ -143,9 +143,9 @@ X_train, X_test, y_train, y_test = train_test_split(iris_data.data, iris_data.ta
 
 dtree = DecisionTreeClassifier()
 
-parameters = {'max_depth':[1,2,3], 'min_samples_split':[2,3]}                                                   #line 11
+parameters = {'max_depth':[1,2,3], 'min_samples_split':[2,3]}                                               #line 11
 
-grid_dtree = GridSearchCV(dtree, param_grid = parameters, cv=3, refit = True)                                   #linw 12
+grid_dtree = GridSearchCV(dtree, param_grid = parameters, cv=3, refit = True)                               #linw 12
 
 grid_dtree.fit(X_train, y_train)
 
@@ -153,17 +153,18 @@ scores_df = pd.DataFrame(grid_dtree.cv_results_)
 scores_df[['params', 'mean_test_score', 'rank_test_score', 'split0_test_score', 'split1_test_score', 'split2_test_score']]
 ```
 
-<img  src="https://user-images.githubusercontent.com/97590480/154286823-234f4d9b-443e-4d59-8e02-7abfc95e9e0e.png">>
+<img  src="https://user-images.githubusercontent.com/97590480/154286823-234f4d9b-443e-4d59-8e02-7abfc95e9e0e.png">
 
-1. [line 12]에서 hyperparameters를 설정한다. 층의 갯수를 1, 2, 3으로 설정하고 브랜치를 나누는 최소한의 변수 갯수를 `min_samples_split으로 나누면 층이 2인 것과 3인 것으로 나뉜다
-2. 즉, 우리는 하이퍼파리미터에 따라 그 결과가 달라지는 것이다.
+1. [line 11]에서 hyperparameters를 설정한다. 층의 갯수를 1, 2, 3으로 설정하고 브랜치를 나누는 기준이 되는 최소한의 변수 갯수를 `min_samples_split`으로 나눈다.
+    - 만약, min_samples_split 값이 3이라면, 7개의 변수를 어떤 기준에 의해 나눌려면 적어도 변수가 3개 이상은 되어야 한다. 즉, 1-6, 2-5 로 나눌 수 없다.
+2. [line 12]에서 위에서 설정한 hyperparameters를 이용하여 `GridSearchCV`에 넣어주면 교차검증과 하이퍼파라미터 튜닝을 실시해준다. 여기서 CV는 교차검증의 그룹 수를 의미하고, `refit = True`는 최적의 하이퍼 파라미터 값을 적용한 상태로 학습을 진행하는 것을 말한다.
+3. 이미지를 보면 각 하이퍼 파라미터 값에 따른 평균 정확도 값을 정리한 것을 표로 보여주는데, (depth, min_sample_splits) = (3,2)인 결과가 가장 좋다는 것을 알 수 있다. (3,2)와 (3,3)의 정확도 값이 동일한데, 여기서 우리는 min_sample_splits는 작을수록 좋다는 것을 알 수 있다.
+> min_sample_splits는 작을수록 좋은데 이 말은 제약을 적게 줄수 있다면 적게 주는 것이 좋다는 것이다. 
 
-```pythone
+```python
 print('GridSearchCV 최적 파라미터 : ', grid_dtree.best_params_)
 print('GridSearchCV 최고 정확도 : {0:.4f}'.format(grid_dtree.best_score_))
 ```
 <img src="https://user-images.githubusercontent.com/97590480/154287054-6a9140dc-b3cd-4247-a555-93a7fec67a52.png">
 
-1. 결과를 보면 하이퍼파라미털가 달라질때 마다 결과가 달라지고, 하이퍼파라미터가 달라짐에 따라 평가가 달라지면서 정호가도가 달라진다.
-2. 여기서 가장 적합한 하이퍼파라미터느느 (3,2)로 노드의 층의 갯수는 3, 노드의 구별은 2로 최적이다.
-3. 즉 우리는 이런 식으로 의사결정나무의 교차검증과 테스트를ㄹ 실힛한다.
+1. `.best_params`매서드는 가장 최적의 하이퍼 파라미터 값을 딕셔러니 형태로 받는다. 위에서처럼 표로 확인해도 되지만 이렇게 간단하게 확인할 수 있다.

@@ -22,16 +22,16 @@ ___
 
 #### 1. 데이터 및 라이브러리 불러오기
 ```python
-from sklearn.datasets import load_iris                                                                          #line 1
-from sklearn.tree import DecisionTreeClassifier                                                                 #line 2
-from sklearn.model_selection import train_test_split                                                            #line 3
-from sklearn.metrics import accuracy_score                                                                      #line 4
+from sklearn.datasets import load_iris                                                                      #line 1
+from sklearn.tree import DecisionTreeClassifier                                                             #line 2
+from sklearn.model_selection import train_test_split                                                        #line 3
+from sklearn.metrics import accuracy_score                                                                  #line 4
 
-import numpy as np                                                                                              #line 5
-import pandas as pd                                                                                             #line 6
+import numpy as np                                                                                          #line 5
+import pandas as pd                                                                                         #line 6
 
-iris = load_iris()                                                                                              #line 7
-iris_label = iris.target                                                                                        #line 8
+iris = load_iris()                                                                                          #line 7
+iris_label = iris.target                                                                                    #line 8
 print('iris target값 : ', iris_label)
 print('iris target명 : ', iris.target_names)
 ```
@@ -53,12 +53,12 @@ ___
 #### 2. 기초적인 정확도(accuracy) 평가방법
 이제 우리는 다양한 정확도 계산 방법에 대해 배울 것이다. 크게 일반적인 평가 방법과 K-fold 방법으로 나눠서 알아보자.
 ```python
-x_train, x_test, y_train, y_test = train_test_split(iris_data, iris_label, test_size = 0.2, random_state=11)    #line 9
+x_train, x_test, y_train, y_test = train_test_split(iris_data, iris_label, test_size = 0.2, random_state=11)#line 9
 
-df_clf = DecisionTreeClassifier(random_state = 11)                                                              #line 10
-df_clf.fit(x_train, y_train)                                                                                    #line 11
-pred = df_clf.predict(x_test)                                                                                   #line 12
-print('예측 정확도 : {0: .4f}'.format(accuracy_score(y_test, pred)))                                               #line 13
+df_clf = DecisionTreeClassifier(random_state = 11)                                                          #line 10
+df_clf.fit(x_train, y_train)                                                                                #line 11
+pred = df_clf.predict(x_test)                                                                               #line 12
+print('예측 정확도 : {0: .4f}'.format(accuracy_score(y_test, pred)))                                           #line 13
 ```
 
 <img src="https://user-images.githubusercontent.com/97590480/154082535-5c169fef-6fc5-4e0d-9e91-09e3a616e34d.png">
@@ -75,35 +75,35 @@ print('예측 정확도 : {0: .4f}'.format(accuracy_score(y_test, pred)))       
 
 #### 3. K-fold를 이용한 정확도 평가
 ```python
-from sklearn.model_selection import KFold                                                                       #line 14
+from sklearn.model_selection import KFold                                                                   #line 14
 
 iris = load_iris()
 features = iris.data
 label = iris.target
-dt_clf = DecisionTreeClassifier(random_state = 156)                                                             #line 15
+dt_clf = DecisionTreeClassifier(random_state = 156)                                                         #line 15
 
-kfold = KFold(n_splits = 5)                                                                                     #line 16
+kfold = KFold(n_splits = 5)                                                                                 #line 16
 cv_accuracy = []
 
-n_iter = 0                                                                                                      #line 17
+n_iter = 0                                                                                                  #line 17
 
-for train_index, test_index in kfold.split(features):                                                           #line 18
+for train_index, test_index in kfold.split(features):                                                       #line 18
     x_train, x_test = features[train_index], features[test_index]
-    y_train, y_test = label[train_index], label[test_index]                                                     #line 19
+    y_train, y_test = label[train_index], label[test_index]                                                 #line 19
     
     dt_clf.fit(x_train, y_train)
     pred = dt_clf.predict(x_test)
-    n_iter += 1                                                                                                 #line 20
+    n_iter += 1                                                                                             #line 20
     
-    accuracy = np.round(accuracy_score(y_test, pred), 4)                                                        #line 21
+    accuracy = np.round(accuracy_score(y_test, pred), 4)                                                    #line 21
     train_size = x_train.shape[0]
-    test_size = x_test.shape[0]                                                                                 #line 22
+    test_size = x_test.shape[0]                                                                             #line 22
     
     print('\n#{0} 교차 검증 정확도 : {1}, 학습 데이터 크기 : {2}, 검증 데이터 크기 : {3}'.format(n_iter,accuracy, train_size, test_size))
     print('#{0} 검증 세트 인덱스 : {1}'.format(n_iter, test_index))
     cv_accuracy.append(accuracy)                                                                                        
 
-print('\n## 평균 검증 정확도 : ', np.mean(cv_accuracy))                                                             #line 23
+print('\n## 평균 검증 정확도 : ', np.mean(cv_accuracy))                                                         #line 23
 ```
 
 <img src="https://user-images.githubusercontent.com/97590480/154084646-c8b48954-4ef9-489f-82d2-48ccc91ca6c9.png">

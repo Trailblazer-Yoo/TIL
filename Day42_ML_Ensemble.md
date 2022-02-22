@@ -31,18 +31,18 @@ data_df = pd.DataFrame(cancer.data, columns = cancer.feature_names)
 lr_clf = LogisticRegression()
 knn_clf = KNeighborsClassifier(n_neighbors = 8)
 
-vo_clf = VotingClassifier(estimators=[('LR', lr_clf),('KNN', knn_clf)], voting = 'soft')                            #line 1
+vo_clf = VotingClassifier(estimators=[('LR', lr_clf),('KNN', knn_clf)], voting = 'soft')                        #line 1
 X_train, X_test, y_train, y_test = train_test_split(cancer.data, cancer.target, test_size = 0.2, random_state = 156)
 
-vo_clf.fit(X_train, y_train)                                                                                        #line 2
-pred = vo_clf.predict(X_test)                                                                                       #line 3
+vo_clf.fit(X_train, y_train)                                                                                    #line 2
+pred = vo_clf.predict(X_test)                                                                                   #line 3
 print('Voting 분류기 정확도 : {0:.4f}'.format(accuracy_score(y_test, pred)))
 
 classifiers = [lr_clf, knn_clf]
 for classifier in classifiers:
     classifier.fit(X_train, y_train)
     pred = classifier.predict(X_test)
-    class_name = classifier.__class__.__name__                                                                      #line 4
+    class_name = classifier.__class__.__name__                                                                  #line 4
     print('{0} 정확도: {1:.4f}'.format(class_name, accuracy_score(y_test, pred)))
 ```
 
@@ -56,19 +56,20 @@ for classifier in classifiers:
 
 ### 3. 랜덤 포레스트 실습
 ```python
-def get_new_feature_name_df(old_feature_name_df):                                                                   #line 5
-    feature_dup_df = pd.DataFrame(data=old_feature_name_df.groupby('column_name').cumcount(), columns=['dup_cnt'])  #line 6
-    feature_dup_df = feature_dup_df.reset_index()                                                                   #line 7
-    new_feature_name_df = pd.merge(old_feature_name_df.reset_index(), feature_dup_df, how = 'outer')                #line 8
+def get_new_feature_name_df(old_feature_name_df):                                                               #line 5
+    feature_dup_df = pd.DataFrame(data=old_feature_name_df.groupby(
+        'column_name').cumcount(), columns=['dup_cnt'])                                                         #line 6
+    feature_dup_df = feature_dup_df.reset_index()                                                               #line 7
+    new_feature_name_df = pd.merge(old_feature_name_df.reset_index(), feature_dup_df, how = 'outer')            #line 8
     new_feature_name_df['column_name'] = new_feature_name_df[['column_name',
-     'dup_cnt']].apply(lambda x : x[0] + '_' + str(x[1]) if x[1] > 0 else x[0], axis = 1)                           #line 9
+     'dup_cnt']].apply(lambda x : x[0] + '_' + str(x[1]) if x[1] > 0 else x[0], axis = 1)                       #line 9
     
-    new_feature_name_df = new_feature_name_df.drop(['index'], axis = 1)                                             #line 10
+    new_feature_name_df = new_feature_name_df.drop(['index'], axis = 1)                                         #line 10
     return new_feature_name_df
 ```
 1. [line 5]에서 중복되는 열이 있을경우 구분하여 새롭게 생성하는 함수를 만든다.
 2. [line 6]에서 `.cumcount()` 매서드를 이용해서 중복되는 열의 갯수가 몇개인지 누적으로 보여주고, 이를 `dup_cnt` 열에 저장한다. 가령, study 열이 5개가 중복된다면 study열 중에서 앞에 열부터 `dup_cnt`열에 1,2,3,4,5 값이 생성된다.
-3. [line 7]에서 `reset_index()`를 사용하여 행의 이름으로 사용하던 열 이름을 다시 열로 가져온다. 예를 들어, 행의 이름이 r1 : a,b,c 였다면, 이 행이 열로 변하고 행은 0,1,2로 바뀐다.
+3. [line 7]에서 `reset_index()`를 사용하여 행의 이름으로 사용하던 열 이름을 다시 열로 가져온다. 예를 들어, 행의 이름이 r1이고 각 행의 값이 a,b,c 였다면, 이 r1행이 오른쪽으로 한칸 이동하면서 열로 변하고 행의 값은 인덱싱을 나타내는 0,1,2로 바뀐다.
 4. [line 8]에서 `outer`방식으로 데이터프레임을 병합하는데, 아우터 방식은 합집합 형태로 합쳐지는 것을 의미한다. 즉, 서로 겹치지 않는 열과 행이 있다면 그대로 보존하여 생성하고 겹치는 부분은 중복을 제거하고 합친다.
 5. [line 9]에서 `dup_cnt`열에 넣어놨던 값을 중복되는 열 이름에 `_1, _2, ...`형태로 만들어줌으로써 중복을 피한다.
 6. [line 10]에서 `reset_index()`로 생성된 `index`열을 제거함으로써 마무리한다.
@@ -96,11 +97,11 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score
 import pandas as pd
 import warnings
-warnings.filterwarnings('ignore')                                                                                   #line 11
+warnings.filterwarnings('ignore')                                                                               #line 11
 
 X_train, X_test, y_train, y_test = get_human_dataset()
 
-rf_clf = RandomForestClassifier(random_state = 0)                                                                   #line 12
+rf_clf = RandomForestClassifier(random_state = 0)                                                               #line 12
 rf_clf.fit(X_train, y_train)
 pred = rf_clf.predict(X_test)
 accuracy = accuracy_score(y_test, pred)
@@ -144,9 +145,9 @@ X_train, X_test, y_train, y_test = get_human_dataset()
 gb_clf = GradientBoostingClassifier(random_state = 0)
 params = {
     'n_estimators' : [100, 500],
-    'learning_rate' : [0.05, 0.1]                                                                                   #line 13
+    'learning_rate' : [0.05, 0.1]                                                                               #line 13
 }
-grid_cv = GridSearchCV(gb_clf, param_grid = params, cv = 2, verbose = 1)                                            #line 14
+grid_cv = GridSearchCV(gb_clf, param_grid = params, cv = 2, verbose = 1)                                        #line 14
 grid_cv.fit(X_train, y_train)
 gv_pred = grid_cv.best_estimator_.predict(X_test)
 gb_accuracy = accuracy_score(y_test, gb_pred)

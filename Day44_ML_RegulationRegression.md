@@ -45,8 +45,9 @@ ___
 <img src="https://user-images.githubusercontent.com/97590480/155441345-1cf3fccd-8138-4192-b8c8-ada191e074a9.png">
 
 3. 위의 이미지처럼 1차 함수에 대한 손실함수를 미분하면 람다가 분모로 들어가는 것을 볼수 있다. 이처럼 다중선형회귀를 실시할 경우 람다의 크기에 따라 회귀계수가 바뀌게 되는데, 람다가 커지면 회귀계수는 감소하고 람다가 작아지면 회귀계수는 커진다.
+> argmin은 argument minimize의 약자로 오른쪽의 식을 최소로 만드는 값을 함수값으로 갖는다는 의미이다.
 ___
-4. 이를 Alternative Fomulation 형태로 표현하면 다음과 같다.
+1. 이를 Alternative Fomulation 형태로 표현하면 다음과 같다.
 
 <img src="https://user-images.githubusercontent.com/97590480/155441714-a552602a-7712-4cb5-8db6-8e07a4ed9e0d.png">
 

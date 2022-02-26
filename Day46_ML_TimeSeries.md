@@ -33,6 +33,7 @@ python -m ipykernel install --user --name [가상환경이름] --display-name "[
 > 내가 만든 가상환경을 activate를 이용하여 들어가서 가상환경에 주피터노트북과 ipykernel을 깔아준다. ipykernel은 주피터 노트북을 설치하면 같이 설치되지만 혹시 모르니 설치해준다. 그리고 다음 명령어를 입력해주면 가상환경이 잘 추가되는 것을 볼 수 있다.
 
 여기서 위에서 입력한 코드처럼 입력하지 않는다면 오류가 날 가능성이 높다. 왜냐하면 내가 4시간 헤매봤으니 잘 안다. 괜히 base환경에 fbprophet을 설치하려는 뻘짓하지 말고 가상환경을 새로 만들어주는 것이 가장 현명하고 빠른 방법이다.
+___
 
 ### 2. 시계열 분석 실습
 이제 실습을 해보자.
@@ -51,6 +52,7 @@ print(df.head())
 - 아보카도 데이터를 불러서 출력하면 위의 이미지처럼 나오는데 저기서 중요한 것은 날짜 데이터가 포함된다는 것이다.
 - 날짜에 따른 종속변수는 가격, 나머지는 독립변수로 설정된다.
 ___
+
 ```python
 df.groupby('type').mean()
 ```
@@ -60,6 +62,7 @@ df.groupby('type').mean()
 - 여기를 보면 일반(conventional) 아보카도와 유기농(organic) 아보카도가 있다.
 - 우리는 일반 아보카도에 대한 평균 가격의 예측을 할거기 때문에 일반 아보카도만 뽑아오는 데이터 전처리를 해줘야 한다.
 ___
+
 ```python
 df = df.loc[(df.type == 'conventional') & (df.region == 'TotalUS')]                                         #line 1
 df['Date'] = pd.to_datetime(df['Date'])                                                                     #line 2
@@ -75,6 +78,7 @@ print(data.head())
 
 <img src="https://user-images.githubusercontent.com/97590480/155841866-b9ce9b57-fded-4add-9e56-d00a8ffe3501.png">
 ___
+
 ```python
 data.plot(x = 'ds', y = 'y', figsize = (16, 8))
 ```
@@ -82,6 +86,7 @@ data.plot(x = 'ds', y = 'y', figsize = (16, 8))
 <img src="https://user-images.githubusercontent.com/97590480/155841947-3561118f-52f3-4022-9131-9797d29174da.png">
 
 plot 함수를 이용해서 데이터를 시각화해보면 위의 이미지처럼 나온다.
+___
 
 #### 2. 모델 학습
 ```python
@@ -98,6 +103,7 @@ print(forecast.tail())
 <img src="https://user-images.githubusercontent.com/97590480/155842186-cca704fb-e92f-42a5-94ae-4a6fa4550923.png">
 
 ___
+
 ```python
 fig1 = TimeSeries.plot(forecast)
 fig2 = TimeSeries.plot_components(forecast)

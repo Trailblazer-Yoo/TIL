@@ -69,7 +69,7 @@ ___
 1. cramer's v correlation coefficient(크래머의 V 상관계수)
    - 범주 대상이 3개 이상일 경우에 사용이 가능하다.
    - `scipy.stats.contingency.association(observed, method='cramer')`를 입력하면 측정이 가능하다. method 속성의 디폴트값은 cramer이므로 따로 입력하지 않아도 된다. 그러나 observed는 행렬의 형태로 변형해줘야 하므로 밑에서 실습을 통해 더 자세히 알아본다.
-
+___
 #### 3. 독립변수가 하나는 연속형, 하나는 범주형
 1. point biserial corrlation
    - 범주 대상이 2개인 범주형 변수와 연속형 변수 사이의 상관관계를 구할 때 사용한다.
@@ -94,8 +94,9 @@ sns.pairplot(student_label)
 
 <img src="https://user-images.githubusercontent.com/97590480/155884593-b9bab0e7-37a0-4cdf-ae75-a0666283a0b3.png">
 
-1. 위의 이미지는 `sns.pairplot`을 이용해서 상관관계를 시각화한 것이다. 수학, 읽기, 쓰기 모두 강한 양의 상관관계를 보이는 것을 눈으로도 확인이 가능하다.
+위의 이미지는 `sns.pairplot`을 이용해서 상관관계를 시각화한 것이다. 수학, 읽기, 쓰기 모두 강한 양의 상관관계를 보이는 것을 눈으로도 확인이 가능하다.
 
+___
 ```python
 from sklearn import preprocessing
 
@@ -113,6 +114,8 @@ student_df['parental level of education'] = student_df['parental level of educat
     "bachelor's degree", "master's degree"], [0, 1, 2, 3, 4, 5])
 ```
 여기서는 독립변수들 사이의 관계를 살펴보기 위해 명목변수들을 label화 시킨다.
+
+___
 
 ```python
 from scipy.stats import chi2_contingency
@@ -148,4 +151,4 @@ sns.heatmap(student_feature_corrmatrix, annot = True)
 
 <img src="https://user-images.githubusercontent.com/97590480/155885064-b2fed332-be27-4087-b95a-b30b5f6ef1ec.png">
 
-1. 위의 코드를 입력하면 히트맵 결과를 얻어낼 수 있다. 결과를 보면 대부분 0에 가까우므로 독립변수는 서로서로 독립이라는 것을 알 수 있다.
+위의 코드를 입력하면 히트맵 결과를 얻어낼 수 있다. 결과를 보면 대부분 0에 가까우므로 독립변수는 서로 독립이라는 것을 알 수 있다.

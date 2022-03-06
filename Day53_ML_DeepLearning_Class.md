@@ -106,3 +106,76 @@ cross_entropy_error(np.array(y), np.array(t))
 ```
 1. t는 정답 레이블이다. 교차 엔트로피는 정답 레이블에 해당하는 확률에 따라 정보량을 계산해주는 함수이다.
 2. 위에서 정답 레이블에 해당하는 확률은 0.6, 아래에서는 0.1이다. 확률이 높으면 새롭게 얻는 정보량이 낮으므로 교차 엔트로피 값이 낮고, 확률이 낮으면 새롭게 얻는 정보량이 높으므로 교차 엔트로피 값이 높은 것을 확인할 수 있다.
+
+___
+
+### 5. 배치용 교차 엔트로피 구현
+신경망을 배치 처리를 해준다면 교차 엔트로피도 이에 맞게 설정해줘야 한다.
+
+```python
+def cross_entropy_error(y, t):
+    if y.ndim == 1:                                                                 #line 1
+        t = t.reshape(1, t.size)                                                    #line 2
+        y = y.reshape(1, y.size)
+    
+    batch_size = y.shape[0]                                                         #line 3
+    return -np.sum(np.log(y[np.arange(batch_size), t] + 1e-7)) / batch_size         #line 4
+```
+1. [line 1]에서 nump의 `ndim` 매서드를 이용하여 y가 1차원 벡터일 경우에 y와 t의 차원을 바꿔주는 조건문의 형태이다.
+2. [line 2]에서 `reshape` 매서드를 사용하는데, 이를 이용하여 차원을 바꿔준다.
+3. [line 3]에서 `y.shape[0]`을 이용해 [행, 열] 중에서 행의 갯수(데이터의 갯수)를 배치 사이즈로 설정해준다.
+4. [line 4]에서 `np.log(y[np.arange(batch_size), t])`는 `np.arange(batch_size)`로 [0,1,2,...,batch_size]의 리스트를 생성하고 t는 정답 레이블이 저장되어 있으므로 y[batch_size, t]으로 인덱싱하여 해당 위치에 있는 y의 요소값을 받는다. 예를들어, t = [0,0,1,0,0]이라면 y 행렬에서 1열의 데이터 4개, 2열의 데이터 1개를 가져온다.
+___
+
+### numpy reshape 함수
+reshape 함수에 대해서 상세히 서술하겠다.
+#### 1. 1차원을 2차원으로 변환
+```python
+import numpy as np
+vector = np.array([1,2,3,4,5,6,7,8])
+print(vector.reshape(2,4))
+print(np.reshape(vector, (4,2)))
+```
+
+<img src="https://user-images.githubusercontent.com/97590480/156909864-775e9e3a-abb6-4aed-933a-c4e156c89d2c.png">
+
+위의 코드를 실행하면 위와 같은 결과가 나온다. `reshape(2,4)`에서 2는 행의 갯수, 4는 열의 갯수이다.
+> 만약 vector가 [1,2,3,4,5,6,7,8]의 리스트 형태라면 `vector.reshape`는 `numpy.ndarray` 타입만 가능하므로 리스트 형태는 오류가 발생한다. 하지만 `np.reshape((vector), (4,2))`는 리스트 형태도 사용이 가능하므로 데이터 타입에 신경을 쓰기 싫다면 아래처럼 작성해주면 좋다.
+
+___
+
+#### 2. 1차원을 3차원 변환
+```python
+vector = np.arange(1,9)
+print(vector.reshape(2,2,2))
+```
+
+<img src="https://user-images.githubusercontent.com/97590480/156909954-f77e4499-cf89-4dcd-b6d2-1d579145f264.png">
+
+1. 1차원을 3차원으로 변환하고 싶다면 `reshape(2,2,2)`처럼 속성을 하나 더 설정해주면 된다. 
+2. `np.arange(1,9)`는 `range(1, 9)` 함수와 동일한 역할을 해주는데, 타입을 `numpy.ndarray`로 받는다.
+3. 출력 결과를 보면 '\n'를 통해 3차원 데이터라는 것을 표시해주고 있다.
+
+___
+
+#### 3. reshape(-1)의 의미
+가끔 `reshape(-1, 3)`처럼 -1이 들어간 코드를 볼 수 있다. 그 의미를 간단히 설명하겠다.
+
+```python
+vector = np.arange(1,13)
+print(vector.reshape(-1, 2))
+```
+
+<img src="https://user-images.githubusercontent.com/97590480/156910090-09eaab67-081d-4cc8-a6f8-40b0d38ad267.png">
+
+`reshape(-1, 2)`는 2개의 열로 행을 자동적으로 조정해준다. 만약, 열은 우리가 정한대로 지정하되, 행이 얼마나 들어올지 모르겠다면 행을 -1로 설정해주면 알아서 행을 조절해준다. 이는 열 속성에 -1을 설정해줘도 동일하다.
+
+```python
+print(vector.reshape(-1))
+print(vector.reshape(1,-1))
+```
+
+<img src="https://user-images.githubusercontent.com/97590480/156910165-657c9606-14a7-48bc-98b9-4e01311e5ddc.png">
+
+1. `reshape(-1)`의 출력결과를 보면 1차원 배열을 반환하는 것을 볼 수 있다.
+2. 반면에, `reshape(1, -1)`은 `reshape(-1)`과 동일한 형태의 배열을 보이지만 2차원 배열을 반환하는 것을 확인할 수 있다.

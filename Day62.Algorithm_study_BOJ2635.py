@@ -15,5 +15,3 @@ len = [len(space[i]) for i in range(n)]
 len_max = max(len)
 print(len_max)
 print(' '.join(map(str,space[len.index(len_max)][::-1])))
-# print(' '.join(space[len.index(len_max)]))
-    

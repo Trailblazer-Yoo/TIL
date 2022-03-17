@@ -14,4 +14,5 @@ for i in range(1,n):
         ans2[i] = max(ans2[i], ans2[i-2] + 1)
         print(ans2)
         
+        
 print(max(max(ans1), max(ans2)))

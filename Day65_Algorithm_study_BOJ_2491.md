@@ -1,3 +1,10 @@
+# TIL(Today I Learned)
+
+___
+
+> Mar/17th/2022_Multi campus_유선종 Day65
+
+```python
 n = int(input())
 num = [int(i) for i in input().split()]
 
@@ -16,3 +23,4 @@ for i in range(1,n):
         
         
 print(max(max(ans1), max(ans2)))
+```

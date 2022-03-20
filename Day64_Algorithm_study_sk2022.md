@@ -1,3 +1,10 @@
+# TIL(Today I Learned)
+
+___
+
+> Mar/16th/2022_Multi campus_유선종 Day64
+
+```python
 def solution(money, costs):
     costs_dict = {}
     efficient = []
@@ -27,3 +34,4 @@ def solution(money, costs):
     return sum(values)
 
 print(solution(1999,[2, 11, 20, 100, 200, 600]))
+```

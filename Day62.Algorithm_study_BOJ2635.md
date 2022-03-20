@@ -1,3 +1,10 @@
+# TIL(Today I Learned)
+
+___
+
+> Mar/14th/2022_Multi campus_유선종 Day62
+
+```python
 n = int(input())
 
 space = [[i,n] for i in range(1, n+1)]
@@ -15,3 +22,4 @@ len = [len(space[i]) for i in range(n)]
 len_max = max(len)
 print(len_max)
 print(' '.join(map(str,space[len.index(len_max)][::-1])))
+```
